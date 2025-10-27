@@ -1,0 +1,13 @@
+cat > .ithub/workflows/ci.yml << 'END'
+name: Test C programs 
+on: [push, pull_request]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: sudo apt-get install -y gcc
+      - run: mkdir -p bin
+      - run: for i in 1 2 3 4 5; do gcc src/execise$i.c -o bin/exercise$i; done
+      - run: echo "1 2 3 4 5 6 7 8 9 10" | ./bin/exercise1
+END
